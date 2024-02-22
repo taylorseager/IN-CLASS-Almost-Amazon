@@ -3,7 +3,7 @@ import renderToDOM from '../../utils/renderToDom';
 import selectAuthor from './selectAuthor';
 
 // USING THIS FORM FOR BOTH CREATE AND UPDATE
-const addBookForm = (obj = {}) => {
+const addBookForm = (obj = {}) => { // setting the default value to empty object; (obj = {}) is a parameter
   clearDom();
   const domString = `
     <form id="${obj.firebaseKey ? `update-book--${obj.firebaseKey}` : 'submit-book'}" class="mb-4">
@@ -29,7 +29,7 @@ const addBookForm = (obj = {}) => {
         <input type="checkbox" class="form-check-input" id="sale" ${obj.sale ? 'checked' : ''}>
         <label class="form-check-label" for="sale">On Sale?</label>
       </div>
-      <button type="submit" class="btn btn-primary">Submit Book
+      <button type="submit" class="btn btn-primary">${obj.firebaseKey ? 'Update Book' : 'Submit Book'}
       </button>
     </form>`;
 
