@@ -41,7 +41,6 @@ const domEvents = () => {
     if (e.target.id.includes('delete-author-btn')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Are you sure you want to get rid of this wonderful author?')) {
-        console.warn('DELETE AUTHOR', e.target.id);
         const [, firebaseKey] = e.target.id.split('--');
 
         deleteSingleAuthor(firebaseKey).then(() => {
@@ -58,7 +57,6 @@ const domEvents = () => {
     // FIXME: ADD CLICK EVENT FOR EDITING AN AUTHOR
     if (e.target.id.includes('update-author')) {
       const [, firebaseKey] = e.target.id.split('--');
-      console.warn('clicked submit');
       getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj));
     }
   });

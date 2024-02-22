@@ -21,7 +21,7 @@ const addAuthorForm = (obj = {}) => {
       <input type="checkbox" class="form-check-input" id="favorite" ${obj.favorite ? 'checked' : ''}>
       <label class="form-check-label" for="favorite">Favorite?</label>
     </div>
-      <button type="submit" class="btn btn-primary mt-3">Submit Author</button>
+      <button type="submit" class="btn btn-primary mt-3">${obj.firebaseKey ? 'Update Author' : 'Submit Author'}</button>
     </form>`;
 
   renderToDOM('#form-container', domString);
