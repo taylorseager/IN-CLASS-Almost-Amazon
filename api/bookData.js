@@ -13,7 +13,13 @@ const getBooks = () => new Promise((resolve, reject) => {
   })
   // response.json() = invoking function
     .then((response) => response.json()) // converting the data that we are fetching to json //
-    .then((data) => resolve(Object.values(data))) // object.values converts keys to an array
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      } // object.values converts keys to an array
+    })
     .catch(reject);
 });
 

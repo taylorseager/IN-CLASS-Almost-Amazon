@@ -1,7 +1,7 @@
 // for merged promises
 
-import { getSingleBook } from './bookData';
-import { getAuthorBooks, getSingleAuthor } from './authorData';
+import { deleteBook, getSingleBook } from './bookData';
+import { deleteSingleAuthor, getAuthorBooks, getSingleAuthor } from './authorData';
 
 // TODO: Get data for viewBook
 const getBookDetails = async (bookFirebaseKey) => {
@@ -21,4 +21,11 @@ const getAuthorDetails = async (authorFirebaseKey) => {
   return { ...authorObject, books: authorsBooks };
 };
 
-export { getBookDetails, getAuthorDetails };
+const deleteAuthorAndAuthorBooks = async (authorFirebaseKey) => {
+  const authorBooks = await getAuthorBooks(authorFirebaseKey);
+  const deleteBookPromises = await authorBooks.map((abObj) => deleteBook(abObj.firebasekey));
+
+  await Promise.all(deleteBookPromises).then(() => deleteSingleAuthor(authorFirebaseKey));
+};
+
+export { getBookDetails, getAuthorDetails, deleteAuthorAndAuthorBooks };

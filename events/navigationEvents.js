@@ -20,6 +20,9 @@ const navigationEvents = () => {
     getBooks().then(showBooks);
   });
 
+  document.querySelector('#logo').addEventListener('click', () => {
+    getBooks().then(showBooks);
+  });
   // FIXME: STUDENTS Create an event listener for the Authors
   // 1. When a user clicks the authors link, make a call to firebase to get all authors
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting
