@@ -64,7 +64,7 @@ const domEvents = () => {
       getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj));
     }
 
-    // TODO: CLICK EVENT FOR VIEW author DETAILS
+    // TODO: CLICK EVENT FOR VIEW AUTHOR DETAILS
     if (e.target.id.includes('view-author-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
 

@@ -16,6 +16,7 @@ const getBookDetails = async (bookFirebaseKey) => {
 const getAuthorDetails = async (authorFirebaseKey) => {
   const authorObject = await getSingleAuthor(authorFirebaseKey);
   const authorsBooks = await getAuthorBooks(authorFirebaseKey);
+  console.warn(authorsBooks);
   console.warn(authorObject, authorsBooks);
   return { ...authorObject, books: authorsBooks };
 };
