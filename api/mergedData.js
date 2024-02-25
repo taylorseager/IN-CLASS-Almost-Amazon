@@ -1,7 +1,9 @@
 // for merged promises
 
-import { deleteBook, getSingleBook } from './bookData';
-import { deleteSingleAuthor, getAuthorBooks, getSingleAuthor } from './authorData';
+import { deleteBook, getBooks, getSingleBook } from './bookData';
+import {
+  deleteSingleAuthor, getAuthorBooks, getSingleAuthor, getAuthors
+} from './authorData';
 
 // TODO: Get data for viewBook
 const getBookDetails = async (bookFirebaseKey) => {
@@ -23,9 +25,33 @@ const getAuthorDetails = async (authorFirebaseKey) => {
 
 const deleteAuthorAndAuthorBooks = async (authorFirebaseKey) => {
   const authorBooks = await getAuthorBooks(authorFirebaseKey);
-  const deleteBookPromises = await authorBooks.map((abObj) => deleteBook(abObj.firebasekey));
+  console.warn(authorBooks, 'author books');
+  const deleteBookPromises = await authorBooks.map((abObj) => deleteBook(abObj.firebaseKey));
 
   await Promise.all(deleteBookPromises).then(() => deleteSingleAuthor(authorFirebaseKey));
 };
 
-export { getBookDetails, getAuthorDetails, deleteAuthorAndAuthorBooks };
+// TODO: STRETCH...SEARCH BOOKS
+const searchBooks = async (searchValue) => {
+  const allBooks = await getBooks();
+  const allAuthors = await getAuthors();
+  const filteredBooks = allBooks.filter((book) => (
+    book.title.toLowerCase().includes(searchValue)
+|| book.description.toLowerCase().includes(searchValue)
+  ));
+  console.warn(searchValue);
+
+  const filteredAuthors = await allAuthors.filter((author) => (
+    author.first_name.toLowerCase().includes(searchValue)
+  || author.last_name.toLowerCase().includes(searchValue)
+  || author.email.toLowerCase().includes(searchValue)
+  ));
+  return { filteredBooks, filteredAuthors };
+};
+
+export {
+  getBookDetails,
+  getAuthorDetails,
+  deleteAuthorAndAuthorBooks,
+  searchBooks,
+};

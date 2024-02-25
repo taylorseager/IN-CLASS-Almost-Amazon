@@ -90,13 +90,11 @@ const booksOnSale = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// TODO: STRETCH...SEARCH BOOKS
-
 export {
   getBooks,
   createBook,
   booksOnSale,
   deleteBook,
   getSingleBook,
-  updateBook
+  updateBook,
 };

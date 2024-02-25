@@ -48,7 +48,6 @@ const domEvents = () => {
         const [, firebaseKey] = e.target.id.split('--');
 
         deleteAuthorAndAuthorBooks(firebaseKey).then(() => {
-          console.warn(deleteAuthorAndAuthorBooks, 'delete both');
           getAuthors().then(showAuthors);
         });
       }

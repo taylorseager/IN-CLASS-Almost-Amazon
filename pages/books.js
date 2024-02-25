@@ -9,7 +9,7 @@ const emptyBooks = () => {
 
 const showBooks = (array) => {
   clearDom();
-  if (array.length <= 0) {
+  if (array.length === 0) {
     emptyBooks();
   } else {
     const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
