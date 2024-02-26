@@ -1,17 +1,62 @@
 // for merged promises
 
-import { getSingleBook } from './bookData';
-import { getSingleAuthor } from './authorData';
+import { deleteBook, getBooks, getSingleBook } from './bookData';
+import {
+  deleteSingleAuthor, getAuthorBooks, getSingleAuthor, getAuthors
+} from './authorData';
 
 // TODO: Get data for viewBook
-const getBookDetails = (firebaseKey) => new Promise((resolve, reject) => {
-  // GET SINGLE BOOK
-  getSingleBook(firebaseKey).then((bookObject) => { // returns single book object
-    getSingleAuthor(bookObject.author_id) // we nest this promise so that we can use the book object
-      .then((authorObject) => resolve({ ...bookObject, authorObject }));
-  }).catch(reject);
-  // GET AUTHOR
-  // Create an object that has book data and an object named authorObject
-});
+const getBookDetails = async (bookFirebaseKey) => {
+  const bookObject = await getSingleBook(bookFirebaseKey);
+  const authorObject = await getSingleAuthor(bookObject.author_id);
 
-export default getBookDetails;
+  return { ...bookObject, authorObject };
+};
+
+// GET AUTHOR
+// Create an object that has book data and an object named authorObject
+const getAuthorDetails = async (authorFirebaseKey) => {
+  const authorObject = await getSingleAuthor(authorFirebaseKey);
+  const authorsBooks = await getAuthorBooks(authorFirebaseKey);
+  console.warn(authorsBooks);
+  console.warn(authorObject, authorsBooks);
+  return { ...authorObject, books: authorsBooks };
+};
+
+const deleteAuthorAndAuthorBooks = async (authorFirebaseKey) => {
+  const authorBooks = await getAuthorBooks(authorFirebaseKey);
+  console.warn(authorBooks, 'author books');
+  const deleteBookPromises = await authorBooks.map((abObj) => deleteBook(abObj.firebaseKey));
+
+  await Promise.all(deleteBookPromises).then(() => deleteSingleAuthor(authorFirebaseKey));
+};
+
+// TODO: STRETCH...SEARCH BOOKS
+const searchBooks = async (searchValue) => {
+  const allBooks = await getBooks();
+  const allAuthors = await getAuthors();
+  const filteredBooks = allBooks.filter((book) => (
+    book.title.toLowerCase().includes(searchValue)
+|| book.description.toLowerCase().includes(searchValue)
+  ));
+  console.warn(allBooks, 'mergedData file');
+  console.warn(allAuthors, 'merged data authors');
+
+  const filteredAuthors = await allAuthors.filter((author) => (
+    author.first_name.toLowerCase().includes(searchValue)
+  || author.last_name.toLowerCase().includes(searchValue)
+  || author.email.toLowerCase().includes(searchValue)
+  ));
+  console.warn(filteredBooks, 'filtered Books');
+  console.warn(filteredAuthors, 'filtered authors');
+  console.warn({ filteredBooks, filteredAuthors });
+
+  return { filteredBooks, filteredAuthors };
+};
+
+export {
+  getBookDetails,
+  getAuthorDetails,
+  deleteAuthorAndAuthorBooks,
+  searchBooks,
+};

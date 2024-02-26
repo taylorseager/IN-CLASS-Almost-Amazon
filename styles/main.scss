@@ -57,7 +57,7 @@ body {
     }
   }
 
-  #store {
+  #search-store {
     width: 90%;
     display: flex;
     flex-flow: row wrap;
@@ -84,7 +84,7 @@ body {
 }
 
 #view {
-  width: 90%;
+  width: 33%;
   margin: auto;
 
   .details {
