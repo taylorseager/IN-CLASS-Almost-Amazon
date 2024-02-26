@@ -31,13 +31,11 @@ const navigationEvents = () => {
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
   document.querySelector('#authors').addEventListener('click', () => {
-    console.warn('CLICKED AUTHORS');
     getAuthors().then(showAuthors);
   });
 
   // TODO: Filter Fave authors
   document.querySelector('#fav-authors').addEventListener('click', () => {
-    console.warn('CLICKED FAVE AUTHORS');
     showFaveAuthors().then(showAuthors);
   });
 
@@ -47,19 +45,18 @@ const navigationEvents = () => {
 
     // WHEN THE USER PRESSES ENTER, MAKE THE API CALL AND CLEAR THE INPUT
     if (e.keyCode === 13) {
-      searchBooks(searchValue).then(({ books, authors }) => {
-        if (searchValue.length >= 0) {
-          showBooks(books, false);
-          showAuthors(authors, false);
+      searchBooks(searchValue).then(({ filteredBooks, filteredAuthors }) => {
+        if (filteredAuthors.length > 0 || filteredBooks.length > 0) {
+          showBooks(filteredBooks, false);
+          showAuthors(filteredAuthors, false);
         } else {
           clearDom();
           const domString = '<h1>No Results For You!</h1>';
-          renderToDOM('#store', domString);
+          renderToDOM('#search-store', domString);
         }
       });
       document.querySelector('#search').value = '';
     }
-    console.warn(searchValue);
   });
 };
 
