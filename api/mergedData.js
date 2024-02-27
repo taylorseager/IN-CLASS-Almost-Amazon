@@ -18,8 +18,6 @@ const getBookDetails = async (bookFirebaseKey) => {
 const getAuthorDetails = async (authorFirebaseKey) => {
   const authorObject = await getSingleAuthor(authorFirebaseKey);
   const authorsBooks = await getAuthorBooks(authorFirebaseKey);
-  console.warn(authorsBooks);
-  console.warn(authorObject, authorsBooks);
   return { ...authorObject, books: authorsBooks };
 };
 
@@ -49,9 +47,20 @@ const searchBooks = async (searchValue) => {
   return { filteredBooks, filteredAuthors };
 };
 
+const deleteAuthorBooksRelationship = (firebaseKey) => new Promise((resolve, reject) => {
+  getAuthorBooks(firebaseKey).then((authorBooksArray) => {
+    const deleteBookPromises = authorBooksArray.map((book) => deleteBook(book.firebaseKey));
+
+    Promise.all(deleteBookPromises).then(() => {
+      deleteSingleAuthor(firebaseKey).then(resolve);
+    });
+  }).catch(reject);
+});
+
 export {
   getBookDetails,
   getAuthorDetails,
   deleteAuthorAndAuthorBooks,
   searchBooks,
+  deleteAuthorBooksRelationship
 };

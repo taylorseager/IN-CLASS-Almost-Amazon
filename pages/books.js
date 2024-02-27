@@ -4,8 +4,8 @@ import '@fortawesome/fontawesome-free';
 // import filteredBooks from '../api/mergedData';
 
 const emptyBooks = () => {
-  const domString = '<h1>No Books</h1>';
-  renderToDOM('#store', domString);
+  const domString = '<h1>No Books For You!</h1>';
+  renderToDOM('#search-store', domString);
 };
 
 const showBooks = (searchBooks) => {
@@ -14,6 +14,9 @@ const showBooks = (searchBooks) => {
 
   const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
 
+  renderToDOM('#add-button', btnString);
+
+  const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
   renderToDOM('#add-button', btnString);
 
   let domString = '';
