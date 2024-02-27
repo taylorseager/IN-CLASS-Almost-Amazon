@@ -32,7 +32,7 @@ const showBooks = (searchBooks) => {
         </div>
       </div>`;
   });
-  renderToDOM('#search-store', domString);
+  renderToDOM('#store', domString);
 };
 
 export { showBooks, emptyBooks };

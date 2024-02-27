@@ -1,4 +1,6 @@
-import { createAuthor, getAuthors, updateAuthor } from '../api/authorData';
+import {
+  createAuthor, getAuthors, showFaveAuthors, updateAuthor
+} from '../api/authorData';
 import { createBook, updateBook, getBooks } from '../api/bookData';
 import { showAuthors } from '../pages/authors';
 import { showBooks } from '../pages/books';
@@ -45,13 +47,12 @@ const formEvents = () => {
     }
 
     // FIXME: ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
-    if (e.target.id.includes('submit')) {
+    if (e.target.id.includes('submit-author')) {
       const payload = {
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
         email: document.querySelector('#email').value,
-        image: document.querySelector('#image').value,
-        favorite: document.querySelector('#favorite').value,
+        favorite: document.querySelector('#favorite').checked,
       };
 
       createAuthor(payload).then(({ name }) => {
@@ -72,9 +73,10 @@ const formEvents = () => {
         favorite: document.querySelector('#favorite').checked,
         firebaseKey,
       };
-
+      console.warn('fave checked?', payload.favorite);
       updateAuthor(payload).then(() => {
         getAuthors().then(showAuthors);
+        showFaveAuthors();
       });
     }
   });

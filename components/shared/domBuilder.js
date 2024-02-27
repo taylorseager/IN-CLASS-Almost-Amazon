@@ -4,14 +4,15 @@ const domBuilder = () => {
   const domString = `
   <div id="navigation"></div>
   <div id="main-container">
-    <div id="add-button"></div>
-    <div id="form-container"></div>
-    <div id="search-store"></div>
-    <div id="store"></div>
-    <div id="view"></div>
+  <div id="add-button"></div>
+  <div id="form-container"></div>
+  <div id="store"></div>
+  <div id="view"></div>
   </div>`;
 
   renderToDOM('#app', domString);
 };
+// <div id="search"></div>
+  // <div id="search-store"></div>
 
 export default domBuilder;
