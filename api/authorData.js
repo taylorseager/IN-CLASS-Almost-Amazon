@@ -95,6 +95,19 @@ const showFaveAuthors = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// TODO: UPDATED FAVE AUTHORS
+// const showUpdatedFaveAuthors = () => new Promise((resolve, reject) => {
+//   fetch(`${endpoint}/authors.json?orderBy="favorite"&equalTo=true`, {
+//     method: 'PATCH',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   })
+//     .then((response) => response.json())
+//     .then((data) => resolve(Object.values(data)))
+//     .catch(reject);
+// });
+
 export {
   getAuthors,
   createAuthor,
@@ -102,5 +115,5 @@ export {
   deleteSingleAuthor,
   updateAuthor,
   getAuthorBooks,
-  showFaveAuthors
+  showFaveAuthors,
 };

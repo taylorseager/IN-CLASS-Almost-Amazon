@@ -1,4 +1,6 @@
-import { createAuthor, getAuthors, updateAuthor } from '../api/authorData';
+import {
+  createAuthor, getAuthors, showFaveAuthors, updateAuthor
+} from '../api/authorData';
 import { createBook, updateBook, getBooks } from '../api/bookData';
 import { showAuthors } from '../pages/authors';
 import { showBooks } from '../pages/books';
@@ -74,6 +76,7 @@ const formEvents = () => {
       console.warn('fave checked?', payload.favorite);
       updateAuthor(payload).then(() => {
         getAuthors().then(showAuthors);
+        showFaveAuthors();
       });
     }
   });
