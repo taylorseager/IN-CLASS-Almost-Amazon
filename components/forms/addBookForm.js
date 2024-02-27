@@ -34,6 +34,8 @@ const addBookForm = (obj = {}) => { // setting the default value to empty object
     </form>`;
 
   renderToDOM('#form-container', domString);
+  renderToDOM('#book-store', '<div></div>');
+
   selectAuthor(`${obj.author_id || ''}`);
 };
 

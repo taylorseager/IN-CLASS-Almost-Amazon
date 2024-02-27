@@ -39,17 +39,12 @@ const searchBooks = async (searchValue) => {
     book.title.toLowerCase().includes(searchValue)
 || book.description.toLowerCase().includes(searchValue)
   ));
-  console.warn(allBooks, 'mergedData file');
-  console.warn(allAuthors, 'merged data authors');
 
   const filteredAuthors = await allAuthors.filter((author) => (
     author.first_name.toLowerCase().includes(searchValue)
   || author.last_name.toLowerCase().includes(searchValue)
   || author.email.toLowerCase().includes(searchValue)
   ));
-  console.warn(filteredBooks, 'filtered Books');
-  console.warn(filteredAuthors, 'filtered authors');
-  console.warn({ filteredBooks, filteredAuthors });
 
   return { filteredBooks, filteredAuthors };
 };

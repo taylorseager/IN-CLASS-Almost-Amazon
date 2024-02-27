@@ -25,6 +25,7 @@ const addAuthorForm = (obj = {}) => {
     </form>`;
 
   renderToDOM('#form-container', domString);
+  renderToDOM('#book-store', '<div></div>');
 };
 
 export default addAuthorForm;
