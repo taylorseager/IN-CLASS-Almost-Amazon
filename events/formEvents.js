@@ -45,13 +45,14 @@ const formEvents = () => {
     }
 
     // FIXME: ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
-    if (e.target.id.includes('submit')) {
+    if (e.target.id.includes('submit-author')) {
       const payload = {
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
         email: document.querySelector('#email').value,
         favorte: document.querySelector('#favorite').value,
       };
+      console.warn('add author', payload);
 
       createAuthor(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };

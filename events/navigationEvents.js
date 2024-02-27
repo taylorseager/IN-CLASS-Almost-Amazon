@@ -42,17 +42,19 @@ const navigationEvents = () => {
   // STRETCH: SEARCH
   document.querySelector('#search').addEventListener('keyup', (e) => {
     const searchValue = document.querySelector('#search').value.toLowerCase();
+    console.warn('const searchValue', searchValue);
 
     // WHEN THE USER PRESSES ENTER, MAKE THE API CALL AND CLEAR THE INPUT
     if (e.keyCode === 13) {
       searchBooks(searchValue).then(({ filteredBooks, filteredAuthors }) => {
+        console.warn('searchValue', searchValue);
         if (filteredAuthors.length > 0 || filteredBooks.length > 0) {
           showBooks(filteredBooks, false);
           showAuthors(filteredAuthors, false);
         } else {
           clearDom();
           const domString = '<h1>No Results For You!</h1>';
-          renderToDOM('#search-store', domString);
+          renderToDOM('#store', domString);
         }
       });
       document.querySelector('#search').value = '';
