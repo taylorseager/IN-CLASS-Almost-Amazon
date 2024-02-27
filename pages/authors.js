@@ -29,6 +29,7 @@ const showAuthors = (array) => {
     </div>`;
   });
   renderToDOM('#store', domString);
+  renderToDOM('#book-store', '<div></div>');
 };
 
 export { showAuthors, emptyAuthors };

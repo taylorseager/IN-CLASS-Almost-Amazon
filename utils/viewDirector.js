@@ -7,9 +7,9 @@ import client from './client';
 const ViewDirectorBasedOnUserAuthStatus = () => {
   firebase.initializeApp(client);
   firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
+    if (user.uid) {
       // person is logged in do something...
-      startApp();
+      startApp(user.uid);
     } else {
       // person is NOT logged in
       loginButton();
