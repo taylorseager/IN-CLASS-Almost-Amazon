@@ -50,9 +50,8 @@ const formEvents = () => {
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
         email: document.querySelector('#email').value,
-        favorte: document.querySelector('#favorite').value,
+        favorite: document.querySelector('#favorite').checked,
       };
-      console.warn('add author', payload);
 
       createAuthor(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
@@ -69,10 +68,10 @@ const formEvents = () => {
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
         email: document.querySelector('#email').value,
-        favorte: document.querySelector('#favorite').value,
+        favorite: document.querySelector('#favorite').checked,
         firebaseKey,
       };
-
+      console.warn('fave checked?', payload.favorite);
       updateAuthor(payload).then(() => {
         getAuthors().then(showAuthors);
       });
