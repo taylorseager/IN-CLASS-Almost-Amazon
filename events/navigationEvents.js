@@ -4,7 +4,7 @@ import { showBooks } from '../pages/books';
 import { getAuthors, showFaveAuthors } from '../api/authorData';
 import { showAuthors } from '../pages/authors';
 import { searchBooks } from '../api/mergedData';
-import clearDom from '../utils/clearDom';
+// import clearDom from '../utils/clearDom';
 import renderToDOM from '../utils/renderToDom';
 
 // navigation events
@@ -50,14 +50,16 @@ const navigationEvents = () => {
     if (e.keyCode === 13) {
       searchBooks(searchValue).then(({ filteredBooks, filteredAuthors }) => {
         console.warn('searchValue', searchValue);
-        if (filteredAuthors.length > 0 || filteredBooks.length > 0) {
+        if (filteredBooks.length > 0 || filteredAuthors.length > 0) {
           showBooks(filteredBooks, false);
           showAuthors(filteredAuthors, false);
         } else {
-          clearDom();
+          // clearDom();
           const domString = '<h1>No Results For You!</h1>';
           renderToDOM('#store', domString);
         }
+        console.warn('showBooks', showBooks);
+        console.warn('filtered books', filteredBooks);
       });
       document.querySelector('#search').value = '';
     }
