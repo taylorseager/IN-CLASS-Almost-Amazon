@@ -4,21 +4,20 @@ import '@fortawesome/fontawesome-free';
 // import filteredBooks from '../api/mergedData';
 
 const emptyBooks = () => {
-  const domString = '<h1>No Books</h1>';
-  renderToDOM('#store', domString);
+  const domString = '<h1>No Books For You!</h1>';
+  renderToDOM('#search-store', domString);
 };
 
 const showBooks = (searchBooks) => {
   clearDom();
   if (!Array.isArray(searchBooks) || searchBooks.length === 0) {
     emptyBooks();
-  } else {
-    const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
-    renderToDOM('#add-button', btnString);
   }
 
+  const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
+  renderToDOM('#add-button', btnString);
+
   let domString = '';
-  console.warn(searchBooks, 'books.js file');
   searchBooks.forEach((item) => {
     domString += `
       <div class="card">
