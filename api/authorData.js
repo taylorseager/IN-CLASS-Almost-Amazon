@@ -82,6 +82,23 @@ const getAuthorBooks = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const showBooksOnSale = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/books.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.warn(data);
+      const booksOnSale = Object.values(data).filter((obj) => obj.sale);
+      console.warn('sale', booksOnSale);
+      resolve(booksOnSale);
+    })
+    .catch(reject);
+});
+
 // TODO: FAVE AUTHOR
 const showFaveAuthors = (uid) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
@@ -96,9 +113,6 @@ const showFaveAuthors = (uid) => new Promise((resolve, reject) => {
       const favoriteAuthors = Object.values(data).filter((obj) => obj.favorite);
       resolve(favoriteAuthors);
       console.warn('fave author', favoriteAuthors);
-      // } else {
-      //   resolve([]);
-      // }
     })
     .catch(reject);
 });
@@ -110,5 +124,6 @@ export {
   deleteSingleAuthor,
   updateAuthor,
   getAuthorBooks,
+  showBooksOnSale,
   showFaveAuthors,
 };

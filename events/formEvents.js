@@ -24,7 +24,7 @@ const formEvents = (uid) => {
         const patchPayload = { firebaseKey: name };
 
         updateBook(patchPayload).then(() => {
-          getBooks().then(showBooks);
+          getBooks(uid).then(showBooks);
         });
       });
     }
@@ -43,7 +43,7 @@ const formEvents = (uid) => {
       };
 
       updateBook(payload).then(() => {
-        getBooks().then(showBooks);
+        getBooks(uid).then(showBooks);
       });
     }
 
@@ -61,7 +61,7 @@ const formEvents = (uid) => {
         const patchPayload = { firebaseKey: name };
 
         updateAuthor(patchPayload).then(() => {
-          getAuthors().then(showAuthors);
+          getAuthors(uid).then(showAuthors);
         });
       });
     }
@@ -77,8 +77,8 @@ const formEvents = (uid) => {
       };
       console.warn('fave checked?', payload.favorite);
       updateAuthor(payload).then(() => {
-        getAuthors().then(showAuthors);
-        showFaveAuthors();
+        getAuthors(uid).then(showAuthors);
+        showFaveAuthors(uid);
       });
     }
   });

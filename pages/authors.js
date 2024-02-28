@@ -14,9 +14,12 @@ const showAuthors = (array) => {
 
   renderToDOM('#add-button', btnString);
 
-  let domString = '';
-  array.forEach((item) => {
-    domString += `
+  if (array.length === 0) {
+    emptyAuthors();
+  } else {
+    let domString = '';
+    array.forEach((item) => {
+      domString += `
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">${item.first_name} ${item.last_name}</h5>
@@ -28,8 +31,9 @@ const showAuthors = (array) => {
           <i class="btn btn-danger" id="delete-author-btn--${item.firebaseKey}"><span class="fas fa-trash-alt"></span></i>
       </div>
     </div>`;
-  });
-  renderToDOM('#store', domString);
+    });
+    renderToDOM('#store', domString);
+  }
 };
 
 export { showAuthors, emptyAuthors };
