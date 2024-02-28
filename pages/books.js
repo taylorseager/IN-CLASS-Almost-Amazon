@@ -9,7 +9,6 @@ const emptyBooks = () => {
 };
 
 const showBooks = (searchBooks) => {
-  console.warn('searchBooks', searchBooks);
   clearDom();
 
   const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
@@ -18,7 +17,6 @@ const showBooks = (searchBooks) => {
 
   let domString = '';
   searchBooks.forEach((item) => {
-    console.warn(item);
     domString += `
       <div class="card">
         <img class="card-img-top" src=${item.image} alt=${item.title} style="height: 400px;">

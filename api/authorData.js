@@ -3,8 +3,8 @@ import client from '../utils/client';
 const endpoint = client.databaseURL;
 
 // FIXME:  GET ALL AUTHORS
-const getAuthors = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors.json`, {
+const getAuthors = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -83,30 +83,25 @@ const getAuthorBooks = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 // TODO: FAVE AUTHOR
-const showFaveAuthors = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors.json?orderBy="favorite"&equalTo=true`, {
+const showFaveAuthors = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => {
+      console.warn('.then(data)', data);
+      const favoriteAuthors = Object.values(data).filter((obj) => obj.favorite);
+      resolve(favoriteAuthors);
+      console.warn('fave author', favoriteAuthors);
+      // } else {
+      //   resolve([]);
+      // }
+    })
     .catch(reject);
 });
-
-// TODO: UPDATED FAVE AUTHORS
-// const showUpdatedFaveAuthors = () => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/authors.json?orderBy="favorite"&equalTo=true`, {
-//     method: 'PATCH',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve(Object.values(data)))
-//     .catch(reject);
-// });
 
 export {
   getAuthors,
