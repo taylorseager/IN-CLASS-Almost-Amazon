@@ -6,8 +6,8 @@ const emptyAuthors = () => {
   renderToDOM('#store', domString);
 };
 
-const showAuthors = (getAuthors) => {
-  console.warn('array', getAuthors);
+const showAuthors = (array) => {
+  console.warn('array', array);
   clearDom();
 
   const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-author-btn">Add An Author</button>';
@@ -15,7 +15,7 @@ const showAuthors = (getAuthors) => {
   renderToDOM('#add-button', btnString);
 
   let domString = '';
-  getAuthors.forEach((item) => {
+  array.forEach((item) => {
     domString += `
     <div class="card" style="width: 18rem;">
       <div class="card-body">

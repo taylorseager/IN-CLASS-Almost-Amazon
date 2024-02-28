@@ -47,7 +47,7 @@ const navigationEvents = (uid) => {
 
     // WHEN THE USER PRESSES ENTER, MAKE THE API CALL AND CLEAR THE INPUT
     if (e.keyCode === 13) {
-      searchBooks(searchValue, uid).then(({ filteredBooks, filteredAuthors }) => {
+      searchBooks(uid, searchValue).then(({ filteredBooks, filteredAuthors }) => {
         console.warn('searchValue', searchValue);
         if (filteredBooks.length > 0 || filteredAuthors.length > 0) {
           showBooks(filteredBooks, false);

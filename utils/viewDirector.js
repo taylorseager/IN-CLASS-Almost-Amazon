@@ -7,7 +7,7 @@ import client from './client';
 const ViewDirectorBasedOnUserAuthStatus = () => {
   firebase.initializeApp(client);
   firebase.auth().onAuthStateChanged((user) => {
-    if (user.uid) {
+    if (user) {
       // person is logged in do something...
       startApp(user.uid);
     } else {
