@@ -15,11 +15,9 @@ const getBookDetails = async (bookFirebaseKey) => {
 
 // GET AUTHOR
 // Create an object that has book data and an object named authorObject
-
-const getAuthorDetails = async (uid, authorFirebaseKey) => {
-  const authorObject = await getSingleAuthor(uid, authorFirebaseKey);
-  const authorsBooks = await getAuthorBooks(uid, authorFirebaseKey);
-
+const getAuthorDetails = async (authorFirebaseKey) => {
+  const authorObject = await getSingleAuthor(authorFirebaseKey);
+  const authorsBooks = await getAuthorBooks(authorFirebaseKey);
   return { ...authorObject, books: authorsBooks };
 };
 
@@ -32,9 +30,9 @@ const deleteAuthorAndAuthorBooks = async (authorFirebaseKey) => {
 };
 
 // TODO: STRETCH...SEARCH BOOKS
-const searchBooks = async (uid, searchValue) => {
-  const allBooks = await getBooks(uid);
-  const allAuthors = await getAuthors(uid);
+const searchBooks = async (searchValue) => {
+  const allBooks = await getBooks();
+  const allAuthors = await getAuthors();
   const filteredBooks = allBooks.filter((book) => (
     book.title.toLowerCase().includes(searchValue)
 || book.description.toLowerCase().includes(searchValue)
