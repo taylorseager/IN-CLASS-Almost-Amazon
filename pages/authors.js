@@ -7,6 +7,7 @@ const emptyAuthors = () => {
 };
 
 const showAuthors = (array) => {
+  console.warn('array', array);
   clearDom();
 
   const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-author-btn">Add An Author</button>';
@@ -14,8 +15,7 @@ const showAuthors = (array) => {
   renderToDOM('#add-button', btnString);
 
   if (array.length === 0) {
-    const domString = '<h1>No Authors For You!</h1>';
-    renderToDOM('#search-store', domString);
+    emptyAuthors();
   } else {
     let domString = '';
     array.forEach((item) => {
@@ -32,7 +32,7 @@ const showAuthors = (array) => {
       </div>
     </div>`;
     });
-    renderToDOM('#search-store', domString);
+    renderToDOM('#store', domString);
   }
 };
 
