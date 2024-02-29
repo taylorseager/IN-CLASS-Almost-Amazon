@@ -16,9 +16,6 @@ const showBooks = (searchBooks) => {
 
   renderToDOM('#add-button', btnString);
 
-  const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
-  renderToDOM('#add-button', btnString);
-
   let domString = '';
   searchBooks.forEach((item) => {
     console.warn(item);
