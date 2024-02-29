@@ -1,11 +1,9 @@
 import clearDom from '../utils/clearDom';
 import renderToDOM from '../utils/renderToDom';
-// import viewBook from './viewBook';
 
 const viewAuthor = (obj) => {
   clearDom();
   let domString = '';
-  console.warn(obj);
   domString += `
   <div class="card" style="width: 18rem;">
   <div class="card-body">

@@ -4,7 +4,6 @@ import { showBooks } from '../pages/books';
 import { getAuthors, showBooksOnSale, showFaveAuthors } from '../api/authorData';
 import { showAuthors } from '../pages/authors';
 import { searchBooks } from '../api/mergedData';
-// import clearDom from '../utils/clearDom';
 import renderToDOM from '../utils/renderToDom';
 import { showResults } from '../pages/searchResults';
 
@@ -38,7 +37,6 @@ const navigationEvents = (uid) => {
   // TODO: Filter Fave authors
   document.querySelector('#fav-authors').addEventListener('click', () => {
     showFaveAuthors(uid).then(showAuthors);
-    console.warn('clicked');
   });
 
   // STRETCH: SEARCH
@@ -48,14 +46,11 @@ const navigationEvents = (uid) => {
     if (e.keyCode === 13) {
       searchBooks(uid, searchValue).then(({ filteredBooks, filteredAuthors }) => {
         if (filteredBooks.length > 0 || filteredAuthors.length > 0) {
-          // showBooks(filteredBooks, false);
-          // showAuthors(filteredAuthors, false);
           showResults(filteredAuthors, filteredBooks);
         } else {
           const domString = '<h1>No Results For You!</h1>';
           renderToDOM('#store', domString);
         }
-        console.warn('filtered books', filteredBooks);
       });
       document.querySelector('#search').value = '';
     }

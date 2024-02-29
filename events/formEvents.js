@@ -75,7 +75,6 @@ const formEvents = (uid) => {
         favorite: document.querySelector('#favorite').checked,
         firebaseKey,
       };
-      console.warn('fave checked?', payload.favorite);
       updateAuthor(payload).then(() => {
         getAuthors(uid).then(showAuthors);
         showFaveAuthors(uid);

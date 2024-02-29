@@ -91,9 +91,7 @@ const showBooksOnSale = (uid) => new Promise((resolve, reject) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.warn(data);
       const booksOnSale = Object.values(data).filter((obj) => obj.sale);
-      console.warn('sale', booksOnSale);
       resolve(booksOnSale);
     })
     .catch(reject);
@@ -109,10 +107,8 @@ const showFaveAuthors = (uid) => new Promise((resolve, reject) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.warn('.then(data)', data);
       const favoriteAuthors = Object.values(data).filter((obj) => obj.favorite);
       resolve(favoriteAuthors);
-      console.warn('fave author', favoriteAuthors);
     })
     .catch(reject);
 });

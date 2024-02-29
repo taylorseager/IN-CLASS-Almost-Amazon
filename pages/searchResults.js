@@ -11,6 +11,7 @@ const showResults = (authors, books) => {
 
   let domString = '';
   authors.forEach((item) => {
+    console.warn('author', item);
     domString += `
     <div class="card" style="width: 18rem;">
       <div class="card-body">
@@ -25,6 +26,7 @@ const showResults = (authors, books) => {
     </div>`;
   });
   books.forEach((item) => {
+    console.warn('books', item);
     domString += `
         <div class="card">
           <img class="card-img-top" src=${item.image} alt=${item.title} style="height: 400px;">

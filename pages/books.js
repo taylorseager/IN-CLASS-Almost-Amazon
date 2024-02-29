@@ -1,7 +1,6 @@
 import clearDom from '../utils/clearDom';
 import renderToDOM from '../utils/renderToDom';
 import '@fortawesome/fontawesome-free';
-// import filteredBooks from '../api/mergedData';
 
 const emptyBooks = () => {
   const domString = '<h1>No Books</h1>';
