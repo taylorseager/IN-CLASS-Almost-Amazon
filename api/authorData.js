@@ -3,8 +3,8 @@ import client from '../utils/client';
 const endpoint = client.databaseURL;
 
 // FIXME:  GET ALL AUTHORS
-const getAuthors = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors.json`, {
+const getAuthors = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -88,31 +88,40 @@ const getAuthorBooks = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// TODO: FAVE AUTHOR
-const showFaveAuthors = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors.json?orderBy="favorite"&equalTo=true`, {
+const showBooksOnSale = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/books.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => {
+      console.warn(data);
+      const booksOnSale = Object.values(data).filter((obj) => obj.sale);
+      console.warn('sale', booksOnSale);
+      resolve(booksOnSale);
+    })
     .catch(reject);
 });
 
-// TODO: UPDATED FAVE AUTHORS
-// const showUpdatedFaveAuthors = () => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/authors.json?orderBy="favorite"&equalTo=true`, {
-//     method: 'PATCH',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve(Object.values(data)))
-//     .catch(reject);
-// });
+// TODO: FAVE AUTHOR
+const showFaveAuthors = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.warn('.then(data)', data);
+      const favoriteAuthors = Object.values(data).filter((obj) => obj.favorite);
+      resolve(favoriteAuthors);
+      console.warn('fave author', favoriteAuthors);
+    })
+    .catch(reject);
+});
 
 export {
   getAuthors,
@@ -121,5 +130,6 @@ export {
   deleteSingleAuthor,
   updateAuthor,
   getAuthorBooks,
+  showBooksOnSale,
   showFaveAuthors,
 };

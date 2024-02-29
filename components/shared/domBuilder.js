@@ -9,6 +9,7 @@ const domBuilder = () => {
     <div id="store"></div>
     <div id="book-store"></div>
     <div id="search"></div>
+    <div id="results"></div>
     <div id="view"></div>
   </div>`;
 
