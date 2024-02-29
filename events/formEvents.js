@@ -5,7 +5,7 @@ import { createBook, updateBook, getBooks } from '../api/bookData';
 import { showAuthors } from '../pages/authors';
 import { showBooks } from '../pages/books';
 
-const formEvents = () => {
+const formEvents = (uid) => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
     // TODO: CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
@@ -17,13 +17,14 @@ const formEvents = () => {
         price: document.querySelector('#price').value,
         author_id: document.querySelector('#author_id').value,
         sale: document.querySelector('#sale').checked,
+        uid,
       };
 
       createBook(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
 
         updateBook(patchPayload).then(() => {
-          getBooks().then(showBooks);
+          getBooks(uid).then(showBooks);
         });
       });
     }
@@ -42,7 +43,7 @@ const formEvents = () => {
       };
 
       updateBook(payload).then(() => {
-        getBooks().then(showBooks);
+        getBooks(uid).then(showBooks);
       });
     }
 
@@ -53,13 +54,14 @@ const formEvents = () => {
         last_name: document.querySelector('#last_name').value,
         email: document.querySelector('#email').value,
         favorite: document.querySelector('#favorite').checked,
+        uid,
       };
 
       createAuthor(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
 
         updateAuthor(patchPayload).then(() => {
-          getAuthors().then(showAuthors);
+          getAuthors(uid).then(showAuthors);
         });
       });
     }
@@ -75,8 +77,8 @@ const formEvents = () => {
       };
       console.warn('fave checked?', payload.favorite);
       updateAuthor(payload).then(() => {
-        getAuthors().then(showAuthors);
-        showFaveAuthors();
+        getAuthors(uid).then(showAuthors);
+        showFaveAuthors(uid);
       });
     }
   });

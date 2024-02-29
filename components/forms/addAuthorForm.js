@@ -2,6 +2,7 @@ import clearDom from '../../utils/clearDom';
 import renderToDOM from '../../utils/renderToDom';
 
 const addAuthorForm = (obj = {}) => {
+  console.warn('obj', obj);
   clearDom();
   const domString = ` 
     <form id="${obj.firebaseKey ? `update-author--${obj.firebaseKey}` : 'submit-author'}" class="mb-4">
@@ -25,7 +26,6 @@ const addAuthorForm = (obj = {}) => {
     </form>`;
 
   renderToDOM('#form-container', domString);
-  renderToDOM('#book-store', '<div></div>');
 };
 
 export default addAuthorForm;
