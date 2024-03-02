@@ -3,7 +3,7 @@ import renderToDOM from '../../utils/renderToDom';
 import selectAuthor from './selectAuthor';
 
 // USING THIS FORM FOR BOTH CREATE AND UPDATE
-const addBookForm = (obj = {}, uid) => { // setting the default value to empty object; (obj = {}) is a parameter
+const addBookForm = (obj = {}, uid) => { // setting the default value to empty object; (obj = {}) as a parameter
   clearDom();
   const domString = `
     <form id="${obj.firebaseKey ? `update-book--${obj.firebaseKey}` : 'submit-book'}" class="mb-4">

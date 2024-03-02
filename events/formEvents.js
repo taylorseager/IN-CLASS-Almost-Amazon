@@ -10,7 +10,7 @@ const formEvents = (uid) => {
     e.preventDefault();
     // TODO: CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
     if (e.target.id.includes('submit-book')) {
-      const payload = {
+      const payload = { // common practice for data
         title: document.querySelector('#title').value,
         description: document.querySelector('#description').value,
         image: document.querySelector('#image').value,
@@ -33,7 +33,7 @@ const formEvents = (uid) => {
     if (e.target.id.includes('update-book')) {
       const [, firebaseKey] = e.target.id.split('--');
       const payload = {
-        title: document.querySelector('#title').value,
+        title: document.querySelector('#title').value, // takes the
         description: document.querySelector('#description').value,
         image: document.querySelector('#image').value,
         price: document.querySelector('#price').value,
